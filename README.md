@@ -51,3 +51,14 @@ wget -qO- https://raw.githubusercontent.com/souza-lb/gerenciador-jdk/refs/heads/
 <b> Aviso importante!</b>
 Não utilize a conta de superusuário para a instalação.
 
+<h2>Como utilizar?</h2>
+
+<b>No terminal com sua conta de usuário comum execute:</b>
+
+```bash
+$ gerenciador-jdk
+```
+
+Como não foi selecionada nenhuma opção será exibida a ajuda
+
+![Tela ajuda](/imagens/tela-ajuda.png)  
