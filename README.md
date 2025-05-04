@@ -194,8 +194,6 @@ souzalb@proton.me
 Segue minha chave pix: 8dcc7e3c-0c6a-4c6f-a4c0-26a5e62686db
 </b>
 
-<div align="center">
-![código-qr](/imagens/qrcode-pix.png)
-</div>
+![código-qr](/imagens/qrcode-pix.png#center)
 
 <b>A utilização deste projeto é livre para alteraçẽos e adptações desde que feita a devida referência ao repositório original e a seu criador.</b>
