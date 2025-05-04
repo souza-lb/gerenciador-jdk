@@ -176,11 +176,13 @@ Agora remova com
 gerenciador-jdk remover 25-ea+21
 ```
 
+Confirme a remoção
+![Tela confirmação remoção](/imagens/tela-confirmação-remocao.png)
+
+
 Observe a mudança na pasta que armazena as versões
 
 ![Tela pasta versão removida](/imagens/tela-pasta-versao-removida.png)
-
-
 
 
 
