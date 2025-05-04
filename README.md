@@ -150,6 +150,25 @@ Observe a saída conforme abaixo
 
 ![Tela java nova](/imagens/tela-java-nova.png)
 
+Vamos abordar a opção de removação de versões do JDK. Tente remover uma versão em uso conforme abaixo
+
+```bash
+gerenciador-jdk remover 25-ea+21
+```
+
+Você receberá a seguinte saída:
+
+![Tela remoção](/imagens/tela-remocao.png)
+
+Observe a pasta que armazena as versões disponíveis
+
+![Tela pasta versões](/imagens/tela-pasta-versoes.png)
+
+
+
+
+
+
 
 
 
