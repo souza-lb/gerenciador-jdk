@@ -190,10 +190,12 @@ Observe a mudança na pasta que armazena as versões
 Leonardo Bruno
 souzalb@proton.me
 
-<b>Gostou do projeto e quer realizar um contribuição voluntária para o desenvolvedor? (Pode ser o valor do café o de um chá...) ☕ 🍵
+<b>Gostou do projeto e quer realizar um contribuição voluntária para o desenvolvedor? (Pode ser o valor do café ou de um chá...) ☕ 🍵
 Segue minha chave pix: 8dcc7e3c-0c6a-4c6f-a4c0-26a5e62686db
 </b>
 
-![código-qr](/imagens/qrcode-pix.png#center)
+<p align="center">
+  <img src="/imagens/qrcode-pix.png" alt="código-qr">
+</p>
 
 <b>A utilização deste projeto é livre para alteraçẽos e adptações desde que feita a devida referência ao repositório original e a seu criador.</b>
