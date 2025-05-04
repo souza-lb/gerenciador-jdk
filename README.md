@@ -123,3 +123,25 @@ Vamos verificar qual versão está definida como corrente. Execute no terminal:
 ```bash
 java --version
 ```
+Observe a saída abaixo
+
+![Tela java atual](/imagens/tela-java-atual.png)
+
+Agora vamos alternar para a versão Early Acess que instalamos anteriormente. Execute no terminal
+
+```bash
+. gerenciador-jdk definir 25-ea+21
+```
+Experimente listar novamente as versões disponíveis (repare que o asterisco aponta a nova versão como padrão)
+
+```bash
+. gerenciador-jdk listar
+```
+
+![Tela nova versão](/imagens/tela-nova-versao.png)
+
+
+
+
+
+
