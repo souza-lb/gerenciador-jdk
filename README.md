@@ -93,3 +93,21 @@ gerenciador-jdk listar
 <b>Você receberá uma saída como abaixo</b>
 
 ![Tela listagem](/imagens/tela-listagem.png)
+
+<b>Vamos definir uma versão como padrão</b>
+
+Execute no terminal como usuário comum
+
+```bash
+gerenciador-jdk definir 24.0.1
+```
+
+Em seguida liste novamente com
+
+```bash
+gerenciador-jdk listar
+```
+
+Repare que agora é exibido um asterico (*) indicando qual a versão está definida como padrão.
+
+![Tela versão padrão](/imagens/tela-versao-padrao.png)
