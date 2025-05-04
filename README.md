@@ -78,3 +78,18 @@ gerenciador-jdk instalar https://download.java.net/java/GA/jdk24.0.1/24a58e0e276
 
 ![Tela sucesso instalação](/imagens/tela-sucesso-download.png)
 
+<b>Prossiga com a instalação de uma nova versão do OpenJDK</b>
+
+```bash
+gerenciador-jdk instalar https://download.java.net/java/early_access/jdk25/21/GPL/openjdk-25-ea+21_linux-x64_bin.tar.gz
+```
+
+<b>Agora vamos listar as versões disponíveis</b>
+
+```bash
+gerenciador-jdk listar
+```
+
+<b>Você receberá uma saída como abaixo</b>
+
+![Tela listagem](/imagens/tela-listagem.png)
