@@ -6,24 +6,6 @@ Gerenciador de ambiente JDK simples usando apenas script shell e dependências m
 
 Ele padroniza a instalação e a alternância entre multiplas versões de OpenJDK num sistema Linux.
 
-<h2>Como instalar?</h2>
-
-<b> Requisitos:</b>
-* Sistema Debian 12 (ou demais sistemas baseados em Debian...)
-* wget
-* tar
-* Conexão com internet disponível (apenas no momento da instalação)
-* Espaço em disco (Pelo menos 300MB para instalação de um pacode JDK)
-
-<b> Aviso importante!</b>
-Não utilize a conta de superusuário para a instalação.
-
-<b>No terminal com sua conta de usuário comum execute:</b>
-
-```bash
-wget -qO- https://raw.githubusercontent.com/souza-lb/gerenciador-jdk/refs/heads/main/instalar | bash
-```
-
 <b>O que esse projeto não faz?</b>
 Ele não executa verificações de segurança no arquivo, portanto cabe ao usuário bom senso na obtenção de pacotes JDK.
 Obtenha arquivos de fontes confiáveis, e verifique regularmente no site OpenJDK para a obtenção de atualizações de segurança.
@@ -50,8 +32,20 @@ extrair do nome do arquivo o número da versão. Caso ele não consiga solicita 
 Ele pode promover a instalação de arquivos locais ou através de uma url. Utilizando apenas ferramentas nativas o script controla as 
 variáveis de ambiente no basrc garantindo que elas apontem para a versão que o usuário deseja utilizar no momento.
 
+<h2>Como instalar?</h2>
 
+<b>No terminal com sua conta de usuário comum execute:</b>
 
+```bash
+wget -qO- https://raw.githubusercontent.com/souza-lb/gerenciador-jdk/refs/heads/main/instalar | bash
+```
+<b> Requisitos:</b>
+* Sistema Debian 12 (ou demais sistemas baseados em Debian...)
+* wget
+* tar
+* Conexão com internet disponível (apenas no momento da instalação)
+* Espaço em disco (Pelo menos 300MB para instalação de um pacode JDK)
 
-
+<b> Aviso importante!</b>
+Não utilize a conta de superusuário para a instalação.
 
