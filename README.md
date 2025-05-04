@@ -200,4 +200,12 @@ Ou utilize o QR Code abaixo
   <img src="/imagens/qrcode-pix.png" alt="código-qr">
 </p>
 
+<b>Você também pode utilizar o paypal para uma doação</b>
+
+https://www.paypal.com/donate/?hosted_button_id=EQVW5QQ7GBGSY
+
+<p align="center">
+  <img src="/imagens/qrcode-paypal.png" alt="código-qr-paypal">
+</p>
+
 <b>A utilização deste projeto é livre para alterações e adptações feita a devida referência ao repositório original e seu criador.</b>
