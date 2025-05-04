@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Autor: Leonardo Bruno
+# Versão: 2.0
+# data: 04/05/2025
+
+# O que esse script faz?
+# Ele instala o gerenciador-jdk na pasta do usuário corrente.
+
+
 echo "Iniciando instalação..."
 
 # Cria diretório temporário para download
