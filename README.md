@@ -56,9 +56,21 @@ Não utilize a conta de superusuário para a instalação.
 <b>No terminal com sua conta de usuário comum execute:</b>
 
 ```bash
-$ gerenciador-jdk
+gerenciador-jdk
 ```
 
 Como não foi selecionada nenhuma opção será exibida a ajuda
 
 ![Tela ajuda](/imagens/tela-ajuda.png)  
+
+Vamos prosseguir com a instalação de 2 versões do OpenJDK.
+
+No terminal execute:
+
+```bash
+gerenciador-jdk instalar https://download.java.net/java/GA/jdk24.0.1/24a58e0e276943138bf3e963e6291ac2/9/GPL/openjdk-24.0.1_linux-x64_bin.tar.gz
+```
+Aguarde a finalização do processo de download
+
+![Tela download](/imagens/tela-download.png)
+
