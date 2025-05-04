@@ -200,4 +200,4 @@ Ou utilize o QR Code abaixo
   <img src="/imagens/qrcode-pix.png" alt="código-qr">
 </p>
 
-<b>A utilização deste projeto é livre para alteraçẽos e adptações desde que feita a devida referência ao repositório original e a seu criador.</b>
+<b>A utilização deste projeto é livre para alterações e adptações feita a devida referência ao repositório original e a seu criador.</b>
