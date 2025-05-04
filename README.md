@@ -135,10 +135,21 @@ Agora vamos alternar para a versão Early Acess que instalamos anteriormente. Ex
 Experimente listar novamente as versões disponíveis (repare que o asterisco aponta a nova versão como padrão)
 
 ```bash
-. gerenciador-jdk listar
+gerenciador-jdk listar
 ```
 
 ![Tela nova versão](/imagens/tela-nova-versao.png)
+
+Vamos verificar se a versão 25 realmente está em uso. Execute no terminal
+
+```bash
+java --version
+```
+
+Observe a saída conforme abaixo
+
+![Tela java nova](/imagens/tela-java-nova.png)
+
 
 
 
