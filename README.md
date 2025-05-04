@@ -202,7 +202,8 @@ Ou utilize o QR Code abaixo
 
 <b>Você também pode utilizar o paypal para uma doação</b>
 
-https://www.paypal.com/donate/?hosted_button_id=EQVW5QQ7GBGSY
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=EQVW5QQ7GBGSY)
+
 
 <p align="center">
   <img src="/imagens/qrcode-paypal.png" alt="código-qr-paypal">
