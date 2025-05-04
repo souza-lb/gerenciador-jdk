@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Iniciando instalação..."
+
 # Cria diretório temporário para download
 TEMP_DIR=$(mktemp -d)
 
@@ -28,6 +30,10 @@ if ! grep -q "# CONFIG_GERENCIADOR_AUTO" $HOME/.bashrc; then
     echo 'export PATH="$PATH:$HOME/.bin"' >> $HOME/.bashrc
     echo "# ------------------------------" >> $HOME/.bashrc
 fi
+
+echo "Limpando arquivos temporários..."
+rm -rf "$TEMP_DIR"
+echo "Limpeza concluída!"
 
 # Mensagem final
 echo "Instalação concluída!"
