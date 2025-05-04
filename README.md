@@ -2,6 +2,8 @@
 
 Gerenciador de ambiente JDK simples usando apenas script shell e dependências mínimas.
 
+![Tela principal gerenciador-jdk](/imagens/tela-principal.png)  
+
 <b>O que esse projeto faz?</b>
 
 Ele padroniza a instalação e a alternância entre multiplas versões de OpenJDK num sistema Linux.
