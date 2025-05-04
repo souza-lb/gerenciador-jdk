@@ -102,6 +102,12 @@ Execute no terminal como usuário comum
 gerenciador-jdk definir 24.0.1
 ```
 
+Se você deseja aplicar imediatamente a mudança no terminal corrente sem precisar fechá-lo execute então (inclua um ponto na frente do comando):
+
+```bash
+. gerenciador-jdk definir 24.0.1
+```
+
 Em seguida liste novamente com
 
 ```bash
@@ -111,3 +117,9 @@ gerenciador-jdk listar
 Repare que agora é exibido um asterico (*) indicando qual a versão está definida como padrão.
 
 ![Tela versão padrão](/imagens/tela-versao-padrao.png)
+
+Vamos verificar qual versão está definida como corrente. Execute no terminal:
+
+```bash
+java --version
+```
