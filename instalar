@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Cria diretório temporário para download
+TEMP_DIR=$(mktemp -d)
+
+# Nome arquivo
+NOME_ARQUIVO="gerenciador-jdk"
+
+# URL para download
+URL_DOWNLOAD=""
+
+# Efetua o download do arquivo do gerenciador
+wget -q "$URL_DOWNLOAD" -O "$TEMP_DIR/$NOME_ARQUIVO"
+
+# Concede permissão de execução
+chmod +x "$TEMP_DIR/$NOME_ARQUIVO"
+
+# Criar diretório .bin na pasta home do usuário
+mkdir -p $HOME/.bin
+
+# Copiar o arquivo gerenciador para o diretório .bin
+cp "$TEMP_DIR/$NOME_ARQUIVO" $HOME/.bin/
+
+# Adicionar o PATH ao .bashrc se não existir
+if ! grep -q "# CONFIG_GERENCIADOR_AUTO" $HOME/.bashrc; then
+    echo -e "\n"
+    echo -e  "\n# CONFIG_GERENCIADOR_AUTO" >> $HOME/.bashrc 
+    echo 'export PATH="$PATH:$HOME/.bin"' >> $HOME/.bashrc
+    echo "# ------------------------------" >> $HOME/.bashrc
+fi
+
+# Mensagem final
+echo "Instalação concluída!"
+echo "Para aplicar as alterações, execute:"
+echo "source ~/.bashrc"
