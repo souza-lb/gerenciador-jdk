@@ -1,0 +1,267 @@
+#!/bin/bash
+
+# Autor: Leonardo Bruno
+# Versão: 2.0
+# data: 26/03/2025
+
+# O que esse script faz?
+# Ele permite manter e alternar o uso de múltiplas
+# versões do OpenJDK de forma organizada.
+
+# Pasta raiz das instalações JDK
+DIR_JDK="$HOME/.versoes_jdk"
+# Link Simbólico para versão em uso corrente
+DIR_ATUAL="$DIR_JDK/atual"
+# Arquivo de configuração do shell
+ARQUIVO_BASHRC="$HOME/.bashrc"
+# Arquivo de controle de configuração
+CONFIGURADO="$DIR_JDK/.configurado"
+
+# Função para gerenciar as configurações do .bashrc
+gerenciar_bashrc() {
+    local acao="$1"
+    
+    # Adiciona o bloco de configuração se não existir
+    if ! grep -q "# CONFIG_JDK_AUTO" "$ARQUIVO_BASHRC"; then
+        echo -e "\n# CONFIG_JDK_AUTO" >> "$ARQUIVO_BASHRC"
+        if [ "$acao" = "ativar" ]; then
+            echo "export JAVA_HOME=\"$DIR_ATUAL\"" >> "$ARQUIVO_BASHRC"
+            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> "$ARQUIVO_BASHRC"
+        else
+            echo "# export JAVA_HOME=\"$DIR_ATUAL\"" >> "$ARQUIVO_BASHRC"
+            echo '# export PATH="$JAVA_HOME/bin:$PATH"' >> "$ARQUIVO_BASHRC"
+        fi
+        echo "# ------------------------------" >> "$ARQUIVO_BASHRC"
+    fi
+
+    # Aplica ação de ativar/desativar
+    case "$acao" in
+        ativar)
+            # Descomenta as linhas de configuração
+            sed -i '/^# CONFIG_JDK_AUTO$/,/^# ------------------------------$/ { /^# export / s/^# // }' "$ARQUIVO_BASHRC"
+            ;;
+        desativar)
+            # Comenta as linhas de configuração
+            sed -i '/^# CONFIG_JDK_AUTO$/,/^# ------------------------------$/ { /^export / s/^/# / }' "$ARQUIVO_BASHRC"
+            ;;
+        *)
+            echo "Ação inválida para gerenciar_bashrc: $acao"
+            exit 1
+            ;;
+    esac
+
+    # Recarrega as configurações do ambiente
+    source "$ARQUIVO_BASHRC" >/dev/null 2>&1
+}
+
+# Exibe ajuda com opções de uso
+mostrar_ajuda() {
+    echo "Uso: gerenciador-jdk [comando]"
+    echo ""
+    echo "Comandos disponíveis:"
+    echo "  instalar [url/arquivo] - Instala versão JDK por url ou arquivo local"
+    echo "  definir [versão]       - Define versão JDK como padrão"
+    echo "  remover [versão]       - Remove completamente versão JDK já instalada"
+    echo "  listar                 - Lista todas as versões JDK instaladas"
+    echo "  desativar              - Desativa versão JDK definida como padrão"
+    echo "  ajuda                  - Exibe esta mensagem de ajuda"
+}
+
+# Desativa a versão definida como padrão
+desativar_padrao() {
+    if [ -L "$DIR_ATUAL" ]; then
+        rm -f "$DIR_ATUAL"
+        echo "JDK padrão desativado. Utilização o JDK nativo do sistema"
+        gerenciar_bashrc "desativar"
+    else
+        echo "Nenhum JDK padrão definido. O sistema já está usando o JDK nativo."
+    fi
+}
+
+# Função de instalação aprimorada (URL ou arquivo local)
+instalar_jdk() {
+    [ -z "$1" ] && echo "Erro: URL/arquivo não fornecido!" && exit 1
+
+    local source="$1"
+    local nome_arquivo=$(basename "$source")
+    local temp_file="/tmp/$nome_arquivo"
+    
+    # Verifica se é uma URL ou arquivo local
+    if [[ "$source" =~ ^https?:// ]]; then
+        echo "Executando download JDK via URL..."
+        if ! wget -q --show-progress "$source" -O "$temp_file"; then
+            echo "Falha no download!"
+            exit 1
+        fi
+    else
+        if [ ! -f "$source" ]; then
+            echo "Erro: Arquivo local '$source' não encontrado!"
+            exit 1
+        fi
+        echo "Usando arquivo local..."
+        cp "$source" "$temp_file" || exit 1
+    fi
+
+    # Extrai a versão do nome do arquivo
+    local versao=$(echo "$nome_arquivo" | grep -oP 'jdk-\K[^_]+')  # Captura após 'jdk-' até '_'
+    [ -z "$versao" ] && versao=$(echo "$nome_arquivo" | grep -oP '-\K\d+-ea\+\d+')  # EA
+    
+    # Tratamento caso nome de arquivo não forneça a versão
+    if [ -z "$versao" ]; then
+        echo "Não foi possível detectar a versão JDK automaticamente"
+        echo "Exemplos válidos: 25-ea+13, 21.0.2, 17"
+        read -p "Digite a versão manualmente: " versao
+        [ -z "$versao" ] && echo "Erro: Versão necessária!" && exit 1
+    fi
+
+    # Verifica instalação existente
+    if [ -d "$DIR_JDK/$versao" ]; then
+        echo "A versão $versao já está instalada!"
+        rm "$temp_file"
+        return
+    fi
+
+    echo "Instalando JDK $versao..."
+    mkdir -p "$DIR_JDK/$versao"
+    if ! tar -xf "$temp_file" -C "$DIR_JDK/$versao" --strip-components=1; then
+        echo "Erro ao extrair arquivo!"
+        rm "$temp_file"
+        exit 1
+    fi
+    rm "$temp_file"
+
+    # Configura ambiente na primeira instalação
+    if [ ! -f "$CONFIGURADO" ]; then
+        gerenciar_bashrc "desativar"
+        touch "$CONFIGURADO"
+    fi
+    echo "JDK $versao instalado com sucesso!"
+}
+
+# Define a versão para uso corrente
+definir_versao() {
+    [ -z "$1" ] && echo "Erro: Versão não informada!" && exit 1
+
+    local versao="$1"
+    local alvo="$DIR_JDK/$versao"
+
+    if [ ! -d "$alvo" ]; then
+        echo "Versão $versao não encontrada!"
+        echo "Use 'gerenciador-jdk listar' para ver as disponíveis"
+        exit 1
+    fi
+
+    # Atualiza link simbólico
+    echo "Atualizando link simbólico..."
+    rm -f "$DIR_ATUAL"
+    ln -sf "$alvo" "$DIR_ATUAL"
+    echo "Versão $versao definida como padrão!"
+
+    # Atualiza configurações do ambiente
+    gerenciar_bashrc "ativar"
+}
+
+# Remove versão já instalada
+remover_versao() {
+    [ -z "$1" ] && echo "Erro: Versão não informada!" && exit 1
+
+    local versao="$1"
+    local alvo="$DIR_JDK/$versao"
+    local link_atual=$(readlink "$DIR_ATUAL" 2>/dev/null)
+    local versao_atual=""
+
+    # Obtém a versão atual apenas se o link existir
+    if [ -n "$link_atual" ]; then
+        versao_atual=$(basename "$link_atual")
+    fi
+
+    # Validações
+    if [ ! -d "$alvo" ]; then
+        echo "Versão $versao não encontrada!"
+        exit 1
+    fi
+
+    if [ "$versao" = "$versao_atual" ]; then
+        echo "Não é possível remover a versão em uso!"
+        echo "Mude para outra versão antes de remover"
+        echo "Ou utilize a opção desativar"
+        exit 1
+    fi
+
+    # Confirmação interativa
+    read -p "Confirmar remoção PERMANENTE do JDK $versao? [s/N] " confirmacao
+    if [[ "$confirmacao" =~ [sS] ]]; then
+        echo "Removendo JDK $versao..."
+        rm -rf "$alvo"
+        [ $? -eq 0 ] && echo "Versão removida!" || echo "Erro na remoção!"
+    else
+        echo "Operação cancelada"
+    fi
+}
+
+# Lista as versões instaladas disponíveis para uso
+listar_versoes() {
+    local link_atual=$(readlink "$DIR_ATUAL" 2>/dev/null)
+    local versao_atual=""
+    
+    if [ -n "$link_atual" ] && [ -d "$link_atual" ]; then
+        versao_atual=$(basename "$link_atual")
+    fi
+
+    # Verifica se o diretório JDK existe
+    if [ ! -d "$DIR_JDK" ]; then
+        echo "Nenhuma versão do JDK foi instalada ainda."
+        return
+    fi
+
+    # Obtém lista de versões, ignorando 'atual' e '.configurado'
+    local versoes=$(ls "$DIR_JDK" 2>/dev/null | grep -vE '^(atual|.configurado)$')
+
+    # Se não houver versões instaladas
+    if [ -z "$versoes" ]; then
+        echo "Nenhuma versão do JDK foi instalada ainda."
+        return
+    fi
+
+    echo "Versões disponíveis:"
+    # Lista versões ordenadas semanticamente
+    for versao in $(echo "$versoes" | sort -V); do
+        if [ "$versao" == "$versao_atual" ]; then
+            echo "* $versao"
+        else
+            echo "  $versao"
+        fi
+    done
+
+    # Aviso se nenhum JDK está definido
+    if [ -z "$versao_atual" ]; then
+        echo "Aviso: Nenhum JDK padrão definido. Usando o JDK nativo do sistema."
+    fi
+}
+
+# Controle principal de execução
+case "$1" in
+    "instalar")
+        instalar_jdk "$2"
+        ;;
+    "definir")
+        definir_versao "$2"
+        ;;
+    "remover")
+        remover_versao "$2"
+        ;;
+    "listar")
+        listar_versoes
+        ;;
+    "desativar")
+        desativar_padrao
+        ;;
+    "ajuda"|"")
+        mostrar_ajuda
+        ;;
+    *)
+        echo "Comando inválido!"
+        mostrar_ajuda
+        exit 1
+        ;;
+esac
