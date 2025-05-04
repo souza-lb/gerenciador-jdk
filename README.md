@@ -186,11 +186,15 @@ Observe a mudança na pasta que armazena as versões
 ![Tela pasta versão removida](/imagens/tela-pasta-versao-removida.png)
 
 
+<b>Dúvidas sugestões e contribuições?</b>
+Leonardo Bruno
+souzalb@proton.me
+
+<b>Gostou do projeto e quer realizar um contribuição para o desenvolvedor? (Pode ser o valor do café o de um chá...) ☕ 🍵
+Segue minha chave pix: 8dcc7e3c-0c6a-4c6f-a4c0-26a5e62686db
+</b>
+
+![código-qr](/imagens/codigo-qr-pix.png)
 
 
-
-
-
-
-
-
+A utilização deste projeto é livre para alteraçẽos e adptações desde que feita a devida referência ao repositório original e a seu criador.
