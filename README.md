@@ -114,7 +114,7 @@ Em seguida liste novamente com
 gerenciador-jdk listar
 ```
 
-Repare que agora é exibido um asterico (*) indicando qual a versão está definida como padrão.
+Repare que agora é exibido um asterisco (*) indicando qual a versão está definida como padrão.
 
 ![Tela versão padrão](/imagens/tela-versao-padrao.png)
 
