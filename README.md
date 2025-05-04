@@ -190,7 +190,7 @@ Observe a mudança na pasta que armazena as versões
 Leonardo Bruno
 souzalb@proton.me
 
-<b>Gostou do projeto e quer realizar um contribuição voluntária para o desenvolvedor? (Pode ser o valor do café ou de um chá...) ☕ 🍵
+<b>Gostou do projeto e quer realizar um contribuição voluntária para o desenvolvedor? (Pode ser o valor de uma xícara de café ou chá...) ☕ 🍵
 Segue minha chave pix: 8dcc7e3c-0c6a-4c6f-a4c0-26a5e62686db
 
 Ou utilize o QR Code abaixo
