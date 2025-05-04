@@ -177,6 +177,7 @@ gerenciador-jdk remover 25-ea+21
 ```
 
 Confirme a remoção
+
 ![Tela confirmação remoção](/imagens/tela-confirmação-remocao.png)
 
 
