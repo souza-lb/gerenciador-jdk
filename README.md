@@ -209,4 +209,4 @@ Ou utilize o QR Code abaixo
   <img src="/imagens/qrcode-paypal.png" alt="código-qr-paypal">
 </p>
 
-<b>A utilização deste projeto é livre para alterações e adptações feita a devida referência ao repositório original e seu criador.</b>
+<b>A utilização deste projeto é livre para alterações e adaptações feita a devida referência ao repositório original e seu criador.</b>
