@@ -92,7 +92,7 @@ gerenciador-jdk listar
 
 <b>Você receberá uma saída como abaixo</b>
 
-![Tela listagem](/imagens/tela-listagem.png)
+![Tela listagem](/imagens/tela-listagem-jdk.png)
 
 <b>Vamos definir uma versão como padrão</b>
 
