@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Autor: Leonardo Bruno
-# Versão: 3.0
-# data: 17/05/2025
+# Versão: 4.0
+# data: 19/05/2025
 
 # O que esse script faz?
 # Ele permite manter e alternar o uso de múltiplas
-# versões do OpenJDK de forma organizada.
+# versões do OpenJDK de forma prática e organizada.
 
-# Pasta raiz das instalações JDK
+# Pasta destino para instalação versões JDK
 DIR_JDK="$HOME/.versoes_jdk"
 # Link Simbólico para versão em uso corrente
 DIR_ATUAL="$DIR_JDK/atual"
@@ -19,7 +19,7 @@ CONFIGURADO="$DIR_JDK/.configurado"
 
 # Função para gerenciar as configurações do .bashrc
 gerenciar_bashrc() {
-    local acao="$1"
+    local acao="${1:-}"
     
     # Adiciona o bloco de configuração se não existir
     if ! grep -q "# CONFIG_JDK_AUTO" "$ARQUIVO_BASHRC"; then
@@ -80,7 +80,7 @@ desativar_padrao() {
 
 # Função de instalação aprimorada (URL ou arquivo local)
 instalar_jdk() {
-    [ -z "$1" ] && echo "Erro: URL/arquivo não fornecido!" && return 1
+    [ -z "${1:-}" ] && echo "Erro: URL/arquivo não fornecido!" && return 1
 
     local source="$1"
     local nome_arquivo=$(basename "$source")
@@ -140,7 +140,7 @@ instalar_jdk() {
 
 # Define a versão para uso corrente
 definir_versao() {
-    [ -z "$1" ] && echo "Erro: Versão não informada!" && return 1
+    [ -z "${1:-}" ] && echo "Erro: Versão não informada!" && return 1
 
     local versao="$1"
     local alvo="$DIR_JDK/$versao"
@@ -163,9 +163,9 @@ definir_versao() {
 
 # Remove versão já instalada
 remover_versao() {
-    [ -z "$1" ] && echo "Erro: Versão não informada!" && return 1
+    [ -z "${1:-}" ] && echo "Erro: Versão não informada!" && return 1
 
-    local versao="$1"
+    local versao="${1:-}"
     local alvo="$DIR_JDK/$versao"
     local link_atual=$(readlink "$DIR_ATUAL" 2>/dev/null)
     local versao_atual=""
@@ -240,15 +240,33 @@ listar_versoes() {
 }
 
 # Controle principal de execução
-case "$1" in
+case "${1:-}" in
     "instalar")
-        instalar_jdk "$2"
+        instalar_jdk "${2:-}"
         ;;
     "definir")
-        definir_versao "$2"
+        if [ -z "${2:-}" ]; then
+            echo "Erro: versão não informada!"
+            mostrar_ajuda
+        else
+            if definir_versao "${2:-}"; then
+                : #Sucesso
+            else
+                echo "Erro: Versão inválida ou não instalada"
+            fi
+        fi
         ;;
     "remover")
-        remover_versao "$2"
+         if [ -z "${2:-}" ]; then
+            echo "Erro: versão não informada!"
+            mostrar_ajuda
+        else
+            if remover_versao "${2:-}"; then
+                : #Sucesso
+            else
+                echo "Erro: Versão inválida ou não instalada"
+            fi
+        fi 
         ;;
     "listar")
         listar_versoes
