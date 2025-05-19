@@ -1,4 +1,4 @@
-o#!/bin/bash
+#!/bin/bash
 set -euo pipefail
 
 # Autor: Leonardo Bruno
@@ -15,7 +15,7 @@ echo "Executando download..."
 if ! wget --no-verbose --show-progress "$URL_DOWNLOAD" -O "$TEMP_DIR/$NOME_ARQUIVO"; then
     echo "Erro ao baixar o arquivo!"
     rm -rf "$TEMP_DIR"
-    exit 1  # Corrigido de "return" para "exit" (scripts usam exit)
+    return 1
 fi
 
 chmod +x "$TEMP_DIR/$NOME_ARQUIVO"
@@ -32,5 +32,6 @@ fi
 
 echo "Executando limpeza..."
 rm -rf "$TEMP_DIR"
+
 echo "Instalação concluída!"
 echo "Execute: source ~/.bashrc"
