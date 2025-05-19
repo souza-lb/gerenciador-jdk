@@ -10,10 +10,13 @@
 
 # Pasta destino para instalação versões JDK
 DIR_JDK="$HOME/.versoes_jdk"
+
 # Link Simbólico para versão em uso corrente
 DIR_ATUAL="$DIR_JDK/atual"
+
 # Arquivo de configuração do shell
 ARQUIVO_BASHRC="$HOME/.bashrc"
+
 # Arquivo de controle de configuração
 CONFIGURADO="$DIR_JDK/.configurado"
 
