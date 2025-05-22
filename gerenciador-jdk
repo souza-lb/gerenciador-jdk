@@ -227,7 +227,7 @@ listar_versoes() {
         return
     fi
 
-    echo "Versões disponíveis:"
+    echo "Versões JDK disponíveis:"
     # Lista versões ordenadas semanticamente
     for versao in $(echo "$versoes" | sort -V); do
         if [ "$versao" == "$versao_atual" ]; then
